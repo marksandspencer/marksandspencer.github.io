@@ -8,13 +8,13 @@ banner:
 
    The only way to start writing is to start writing. 
    
-   It is not the fear of writing that is the blocker, it is the fear of not writing well. The self imperative to write the perfect blog, or the fear that the write-up would be terrible and not worth publishing is predominantly the reason(at least that's what I figured for myself)
+   It is not the fear of writing that is the blocker, it is the fear of not writing well. The self imperative to write the perfect blog, or the fear that the write-up would be terrible and not worth publishing is predominantly the reason(or so it is for me.)
 
-   Do remember, as engineers everyone does write really a lot of context - summaries in commits and reviews, emails and chats, Readme's, incident reviews, goals, performance, objectives. And all of them valuable to different audiences.
+   Remember that as engineers everyone does write really a lot of context - summaries in commits and reviews, emails and chats, Readme's, incident reports, goals, performance, objectives. And all of them valuable to different audiences.
 
-   And whenever you do write, you would find that most of the thinking, learning and the coherence all happens during the writing than before. Also, it is never the grammar or the spelling or the language, the tough part is creating cohesion from the massive knowledge base in your brain.
+   And every time you do write, you would notice that majority of the thinking, learning and the coherence all occurs during the writing than before. Furthermore, it is never the grammar or the spelling or the language, the tough part is creating cohesion from the massive knowledge base in your brain.
 
-   In summary, Everyone can write, and it is just some are better than others more owing to the hours put in writing. And especially with technical blogs, writing for the first time still means it will be useful to an audience, as it is either solutions, tutorials, how to's etc.
+   Everyone can write, and it is just some are better than others more owing to the hours put in writing. And especially with technical blogs, writing for the first time still means it will be useful to an audience, as it is either solutions, tutorials, how to's etc.
 
    Some tips:
 
@@ -26,4 +26,8 @@ banner:
    - Delegate the intricacies of the language part to software (e.g.: punctuations, spells)   
      - tools: grammarly.com (also has a vscode plugin), sentencecheckup, etc.
 
-  You want to write more than just technology tutorials and solutions, but don't know what to write about? - go to [hubspot](https://www.hubspot.com/blog-topic-generator) for some inspiration
+  You want to write more than just technology tutorials and solutions, but don't know what to write about? - go to [hubspot](https://www.hubspot.com/blog-topic-generator) for some inspiration.
+
+  Need a bit more help than that, always reach out. Hermitting it out? Then go for some AI writers like [shortly](https://www.shortlyai.com/) or [jarvis](https://www.jasper.ai/)
+
+  Hope this blog has left you with a yearn to go and write yourself.
