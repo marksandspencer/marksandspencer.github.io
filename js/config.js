@@ -4,6 +4,16 @@
  */
 const team = [
   {
+    username: "stevengonsalvez",
+    title: "Principal Engineer",
+    name: "Steven Gonsalvez",
+    html_url: "https://github.com/stevengonsalvez",
+    avatar_url:
+      "https://avatars.githubusercontent.com/u/9320602?v=4",
+    bio:
+      "Fixer | tinkerer | fixes your printer | loves tech"
+  },
+  {
     username: "thesambarnes",
     title: "Engineering Community Manager",
     name: "Sam Barnes",
