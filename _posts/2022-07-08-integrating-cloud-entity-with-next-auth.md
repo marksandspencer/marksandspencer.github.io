@@ -1,3 +1,11 @@
+---
+title: Integrating Cloud Entity with Next Auth
+author: Chris Mitchelmore
+date: 2022-07-08
+banner:
+  image: terminal.png
+---
+
 # Integrating Cloud Entity with Next Auth
 
 M&S is in the process of updating our retail platform. As part of this we will decouple identity from our existing monolith and modernise the feature set along the way.
