@@ -4,6 +4,16 @@
  */
 const team = [
   {
+    username: "stevengonsalvez",
+    title: "Principal Engineer",
+    name: "Steven Gonsalvez",
+    html_url: "https://github.com/stevengonsalvez",
+    avatar_url:
+      "https://avatars.githubusercontent.com/u/9320602?v=4",
+    bio:
+      "fixer | tinkerer | sort your broken printer | loves tech | guitarist"
+  },
+  {
     username: "thesambarnes",
     title: "Engineering Community Manager",
     name: "Sam Barnes",
@@ -11,7 +21,7 @@ const team = [
     avatar_url:
       "https://user-images.githubusercontent.com/9320602/177893673-649ce62c-a01b-40ce-9e51-948603eb2b3c.jpeg",
     bio:
-      "Community Enabler | Mentor | Writer"
+      "community enabler | mentor | writer | speaker"
   },
   {
     username: "Izureru",
@@ -21,6 +31,6 @@ const team = [
     avatar_url:
       "https://avatars.githubusercontent.com/u/5541975?v=4",
     bio:
-      "Community Builder | Thought leader"
+      "community Builder | thought-leader"
   }
 ];
