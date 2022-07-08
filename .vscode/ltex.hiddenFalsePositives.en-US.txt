@@ -1,0 +1,1 @@
+{"rule":"WHAT_TO_VBD","sentence":"^\\QAnd especially with technical blogs, writing for the first time still means it will be useful to an audience, as it is either solutions, tutorials, how to's etc.\\E$"}

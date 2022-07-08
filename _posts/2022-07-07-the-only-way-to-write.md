@@ -1,7 +1,13 @@
 ---
 title: The only way to start writing
 author: Steven Gonsalvez
+published: true
 date: 2022-07-07
+categories: 
+  - blogging
+tags: 
+  - writing
+  - guide
 banner:
   image: writing.jpg
 ---

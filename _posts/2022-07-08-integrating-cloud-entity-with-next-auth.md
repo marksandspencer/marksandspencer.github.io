@@ -1,7 +1,14 @@
 ---
 title: Integrating Cloud Entity with Next Auth
+published: true
 author: Chris Mitchelmore
 date: 2022-07-08
+categories: 
+  - identity
+tags: 
+  - cloudentity
+  - identity
+  - nextjs
 banner:
   image: terminal.png
 ---
