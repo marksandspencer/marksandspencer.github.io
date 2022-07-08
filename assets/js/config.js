@@ -11,7 +11,7 @@ const team = [
     avatar_url:
       "https://avatars.githubusercontent.com/u/9320602?v=4",
     bio:
-      "fixer | tinkerer | sort your broken printer | loves tech | guitarist"
+      "fixer | tinkerer | friendly neighbourhood techie | guitarist"
   },
   {
     username: "thesambarnes",
@@ -32,5 +32,15 @@ const team = [
       "https://avatars.githubusercontent.com/u/5541975?v=4",
     bio:
       "community Builder | thought-leader"
+  },
+  {
+    username: "crmitchelmore",
+    title: "Staff Software engineer",
+    name: "Christopher Mitchelmore",
+    html_url: "https://github.com/crmitchelmore",
+    avatar_url:
+      "https://avatars.githubusercontent.com/u/1902403?v=4",
+    bio:
+      "knowledge addict | drone pilot"
   }
 ];
