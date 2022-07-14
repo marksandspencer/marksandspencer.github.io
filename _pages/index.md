@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Marks and Spencer Engineering
+title: Engineering at Marks and Spencer
 description: A Digital Garden
 permalink: /
 banner:
@@ -26,7 +26,7 @@ page-section--background-highlight" style="padding: 30px 0 30px 0" id="os-projec
     </h1>
 
     <p class="dc-p strategy__subtitle">
-      WRITE some CONTENT
+      A look inside to how Marks and Spencer Engineers think, learn and build
     </p>
 
     <br>
@@ -38,7 +38,7 @@ page-section--background-highlight" style="padding: 30px 0 30px 0" id="os-projec
         </div>
         <h2 class="dc-h2">Participate</h2>
         <p class="dc-p">
-           Some more content
+           Encouraging Engineers to adopt an open ethos
         </p>
       </div>
 
@@ -48,7 +48,7 @@ page-section--background-highlight" style="padding: 30px 0 30px 0" id="os-projec
         </div>
         <h2 class="dc-h2">Share</h2>
         <p class="dc-p">
-            Some content
+            Share knowledge, ideas, technology for benefit of the community
         </p>
       </div>
 
@@ -58,7 +58,7 @@ page-section--background-highlight" style="padding: 30px 0 30px 0" id="os-projec
         </div>
         <h2 class="dc-h2">Promote</h2>
         <p class="dc-p">
-          Some more content
+          Enabling adoption, contribution and sharing into Open Source
         </p>
       </div>
     </div>
