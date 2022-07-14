@@ -72,5 +72,15 @@ const team = [
       "https://avatars.githubusercontent.com/u/6880622?v=4",
     bio:
       "problem solver | thought leadership | tech enthusiast | frontend maverick"
+  },
+  {
+    username: "prabhatthapa",
+    title: "Staff Software engineer",
+    name: "Prabhat Thapa",
+    html_url: "https://github.com/prabhatthapa",
+    avatar_url:
+      "https://avatars.githubusercontent.com/u/37815141?v=4",
+    bio:
+      "tbd | technologist | music manic"
   }
 ];
