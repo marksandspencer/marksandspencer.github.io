@@ -51,7 +51,7 @@ const team = [
     avatar_url:
       "https://avatars.githubusercontent.com/u/2465260?v=4",
     bio:
-      "tbd | tbd"
+      "frontend technologist"
   },
   {
     username: "danyalaytekin",
