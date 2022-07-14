@@ -1,11 +1,9 @@
 title: Marks and Spencer Engineering
 description: Digital Garden for Ideas, Voice and an Open culture 
 email: softwareengineering@marksandspencer.com
-
-# Do not use the leading @ here
 twitter: marksandspencerTech
 
-url:
+url: "https://marksandspencer.com"
 baseurl: "/"
 
 markdown: kramdown
@@ -22,17 +20,10 @@ relative_links:
 
 # SEO Stuff
 author: Marks and Spencer
-description:
 lang: en
 locale: en_GB
-url: "https://marksandspencer.com"
-baseurl: ""
 feed:
-
-# RSS feeds
   posts_limit: 20
-
-
 
 collections:
   docs:
