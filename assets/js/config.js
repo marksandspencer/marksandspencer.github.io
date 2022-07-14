@@ -31,7 +31,7 @@ const team = [
     avatar_url:
       "https://avatars.githubusercontent.com/u/5541975?v=4",
     bio:
-      "community Builder | thought-leader"
+      "community builder | thought-leader"
   },
   {
     username: "crmitchelmore",
@@ -42,5 +42,45 @@ const team = [
       "https://avatars.githubusercontent.com/u/1902403?v=4",
     bio:
       "knowledge addict | drone pilot"
+  },
+  {
+    username: "andreacaldera",
+    title: "Staff Software engineer",
+    name: "Andrea Caldera",
+    html_url: "https://github.com/andreacaldera",
+    avatar_url:
+      "https://avatars.githubusercontent.com/u/2465260?v=4",
+    bio:
+      "frontend technologist"
+  },
+  {
+    username: "danyalaytekin",
+    title: "Senior Software engineer",
+    name: "Danyal Aytekin",
+    html_url: "https://github.com/danyalaytekin",
+    avatar_url:
+      "https://avatars.githubusercontent.com/u/1315042?v=4",
+    bio:
+      "mobile and web dev"
+  },
+  {
+    username: "rockse",
+    title: "Principal engineer",
+    name: "Abhishek Gupta",
+    html_url: "https://github.com/rockse",
+    avatar_url:
+      "https://avatars.githubusercontent.com/u/6880622?v=4",
+    bio:
+      "problem solver | thought leadership | tech enthusiast | frontend maverick"
+  },
+  {
+    username: "prabhatthapa",
+    title: "Staff Software engineer",
+    name: "Prabhat Thapa",
+    html_url: "https://github.com/prabhatthapa",
+    avatar_url:
+      "https://avatars.githubusercontent.com/u/37815141?v=4",
+    bio:
+      "tbd | technologist | music manic"
   }
 ];

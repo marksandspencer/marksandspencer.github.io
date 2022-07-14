@@ -1,7 +1,7 @@
 ---
 title: Integrating Cloud Entity with Next Auth
 published: true
-author: Chris Mitchelmore
+author: Chris Mitchelmore, Andrea Caldera, Prabhat Thapa, Danyal Aytekin 
 date: 2022-07-08
 categories: 
   - identity
