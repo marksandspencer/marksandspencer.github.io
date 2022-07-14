@@ -1,6 +1,6 @@
 /*
- * To add a new member, open a browser and type https://api.github.com/users/${github-username}
- * Get the relevant fields from the output and add it to to below team array.
+ * To add a new member, open a browser and visit https://api.github.com/users/${github-username}
+ * Get the relevant fields from the output and add it to the array below.
  */
 const team = [
   {
@@ -35,7 +35,7 @@ const team = [
   },
   {
     username: "crmitchelmore",
-    title: "Staff Software engineer",
+    title: "Staff Software Engineer",
     name: "Christopher Mitchelmore",
     html_url: "https://github.com/crmitchelmore",
     avatar_url:
@@ -45,7 +45,7 @@ const team = [
   },
   {
     username: "andreacaldera",
-    title: "Staff Software engineer",
+    title: "Staff Software Engineer",
     name: "Andrea Caldera",
     html_url: "https://github.com/andreacaldera",
     avatar_url:
@@ -55,7 +55,7 @@ const team = [
   },
   {
     username: "danyalaytekin",
-    title: "Senior Software engineer",
+    title: "Senior Software Engineer",
     name: "Danyal Aytekin",
     html_url: "https://github.com/danyalaytekin",
     avatar_url:
@@ -65,7 +65,7 @@ const team = [
   },
   {
     username: "rockse",
-    title: "Principal engineer",
+    title: "Principal Engineer",
     name: "Abhishek Gupta",
     html_url: "https://github.com/rockse",
     avatar_url:
@@ -75,7 +75,7 @@ const team = [
   },
   {
     username: "prabhatthapa",
-    title: "Staff Software engineer",
+    title: "Staff Software Engineer",
     name: "Prabhat Thapa",
     html_url: "https://github.com/prabhatthapa",
     avatar_url:
