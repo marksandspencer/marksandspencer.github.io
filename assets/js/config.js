@@ -71,6 +71,6 @@ const team = [
     avatar_url:
       "https://avatars.githubusercontent.com/u/6880622?v=4",
     bio:
-      "TBD | TBD"
+      "problem solver | thought leadership | tech enthusiast | frontend maverick"
   }
 ];
