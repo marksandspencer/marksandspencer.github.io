@@ -31,7 +31,7 @@ const team = [
     avatar_url:
       "https://avatars.githubusercontent.com/u/5541975?v=4",
     bio:
-      "community Builder | thought-leader"
+      "community builder | thought-leader"
   },
   {
     username: "crmitchelmore",
@@ -55,13 +55,13 @@ const team = [
   },
   {
     username: "danyalaytekin",
-    title: "Staff Software engineer",
+    title: "Senior Software engineer",
     name: "Danyal Aytekin",
     html_url: "https://github.com/danyalaytekin",
     avatar_url:
       "https://avatars.githubusercontent.com/u/1315042?v=4",
     bio:
-      "TBD | TBD"
+      "mobile and web dev"
   },
   {
     username: "rockse",
