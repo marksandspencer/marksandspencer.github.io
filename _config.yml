@@ -3,7 +3,7 @@ description: Digital Garden for Ideas, Voice and an Open culture
 email: softwareengineering@marksandspencer.com
 twitter: marksandspencerTech
 
-url: "https://marksandspencer.com"
+url: "https://marksandspencer.github.io/"
 baseurl: "/"
 
 markdown: kramdown
