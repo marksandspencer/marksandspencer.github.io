@@ -21,30 +21,28 @@ Our chosen Customer Identity and Access Management (CIAM) provider is [Cloudenti
 
 TLDR; copypasta to get going for the authorisation code flow.
 
-...
-
-```
+```js
 {
-      id: 'cloudentity',
-      name: 'Cloud Entity,
-      type: 'oauth',
-      wellKnown: `${process.env.OAUTH_BASE_URL}/default/.well-known/openid-configuration`,
-      authorization: {
-        params: {
-          scope: 'email offline_access openid profile profile.*',
-          acr_values: acrValues,
-        },
-      },
-      profile(profile) {
-        return {
-          id: profile.idp,
-        };
-      },
-      idToken: true,
-      clientId: process.env.CE_CLIENT_ID,
-      clientSecret: process.env.CE_CLIENT_SECRET,
-      checks: ['pkce', 'state'],
-    }
+  id: 'cloudentity',
+  name: 'Cloudentity',
+  type: 'oauth',
+  wellKnown: `${process.env.OAUTH_BASE_URL}/default/.well-known/openid-configuration`,
+  authorization: {
+    params: {
+      scope: 'email offline_access openid profile profile.*',
+      acr_values: acrValues,
+    },
+  },
+  profile(profile) {
+    return {
+      id: profile.idp,
+    };
+  },
+  idToken: true,
+  clientId: process.env.CE_CLIENT_ID,
+  clientSecret: process.env.CE_CLIENT_SECRET,
+  checks: ['pkce', 'state'],
+}
 ```
 
 ## Getting Started
@@ -81,104 +79,107 @@ The overall flow is, in retrospect, simple:
 
 ### My Learnings
 - By default NextAuth uses basic auth (e.g. Authorization: base64(username:password)) when it sends the code to request a token. I thought this was a mismatch in what each offered and ended up implementing a custom token request like so:
-
-```
-token: {
-          async request(context) {
-            const params = {
-              grant_type: 'authorization_code',
-              client_id: context.provider.clientId,
-              client_secret: context.provider.clientSecret,
-              redirect_uri: context.provider.callbackUrl,
-              code: context.params.code,
-              code_verifier: context.checks.code_verifier,
-              code_challenge_method: 'S256',
-            };
-            const res = await fetch(
-              '${process.env.OAUTH_BASE_URL}/default/oauth2/token',
-              {
-                method: 'POST',
-                body: new URLSearchParams(params).toString(),
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded',
-                },
-              }
-            );
-            return { tokens: await res.json() };
+  ```js
+  token: {
+    async request(context) {
+      const params = {
+        grant_type: 'authorization_code',
+        client_id: context.provider.clientId,
+        client_secret: context.provider.clientSecret,
+        redirect_uri: context.provider.callbackUrl,
+        code: context.params.code,
+        code_verifier: context.checks.code_verifier,
+        code_challenge_method: 'S256',
+      };
+      const res = await fetch(
+        '${process.env.OAUTH_BASE_URL}/default/oauth2/token',
+        {
+          method: 'POST',
+          body: new URLSearchParams(params).toString(),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-        },
-```
-Turns out supported credential method can be configured in the CloudEntity app and this was the key to unlocking the OIDC config approach for me. 
+        }
+      );
+      return { tokens: await res.json() };
+    },
+  }
+  ```
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/q653o38qvpcvblx1il4w.png)
+  Turns out supported credential method can be configured in the CloudEntity app and this was the key to unlocking the OIDC config approach for me. 
+  ![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/q653o38qvpcvblx1il4w.png)
  
 - The encode and decode options are only relevant to the JWT the next app uses to save the session. 
 The confusion here came because our workspace is configured to use `ES256` to sign the tokens that come back from CE and by default NextAuth accepts `RS256` so when the token comes back I was seeing: `'unexpected JWT alg received, expected RS256, got: ES256'`. I'd seen the encode decode options so naturally jumped to these to try solve the problem :( 
 The long and short of it is, you can configure the expected algorithm in each provider like so:
-
-```
-      id: 'cloudentity',
-      client: {
-        id_token_signed_response_alg: 'ES256',
-      },
-```
+  ```js
+  {
+    id: 'cloudentity',
+    client: {
+      id_token_signed_response_alg: 'ES256',
+    }
+  }
+  ```
 
 - PKCE setup is all automatic (with debug on, you'll see the generated values in the logs) so no need to touch that!
 - As is state. At one point I was seeing an error about not passing state and it seemed like I had to pass a value in authorize params. If everything else is correct, you won't need to set this.
-
 - It's a good idea to have debug mode on so you get visibility of the tokens and requests and you'll almost definitely want to have JWT sessions too. In the top level NextAuth options:
-
-```
+  ```js
+  {
     debug: true,
     session: {
       strategy: 'jwt',
       maxAge: 30 * 24 * 60,
-    },
-```
+    }
+  }
+  ```
+
 - Cloudentity returns idToken by default, you'll need to set `idToken: true` or you'll see `'id_token detected in the response, you must use client.callback() instead of client.oauthCallback()'` incidentally it's the `id_token: true|false` value set in the options that determines the function called.
 
 
 - By default, even if you're using JWT session strategy, the access token (the one you'll likely want to make any future api requests) is not included. You can use the sample code in the docs https://next-auth.js.org/configuration/callbacks#jwt-callback for both session and JWT to get it included. For the poc I did we had different auth levels and wanted to expose that at the session level. It's also worth paying attention to the docs, the functions are called with different values for the first time and any future call. (IMO should be different functions, let consumers manage code reuse and expose a declarative API)
-
-```
-callbacks: {
-      jwt({ token, account, user }) {
-        const accessToken = user?.access_token || account?.access_token;
-        const decoded = jwt.decode(accessToken as string) as JWT;
-        return user || account
-          ? {
-              ...token,
-              accessToken,
-              sessionType: decoded.usersID ? 'registered' : 'guest',
-            }
-          : token;
-      },
-      session({ session, token }) {
-        return {
-          ...session,
-          accessToken: token.accessToken,
-          sessionType: token.sessionType,
-        };
-      },
+  ```ts
+  callbacks: {
+    jwt({ token, account, user }) {
+      const accessToken = user?.access_token || account?.access_token;
+      const decoded = jwt.decode(accessToken as string) as JWT;
+      return user || account
+        ? {
+            ...token,
+            accessToken,
+            sessionType: decoded.usersID ? 'registered' : 'guest',
+          }
+        : token;
     },
-```
+    session({ session, token }) {
+      return {
+        ...session,
+        accessToken: token.accessToken,
+        sessionType: token.sessionType,
+      };
+    },
+  }
+  ```
 
 - `acr_values` can be another gotcha. The spec says they should be communicated by the OIDC discovery endpoint but for me they weren't so you might have to ask around if you didn't configure the workspace. My values were also dynamic: when converting a guest session to a logged in session I need to pass the access token in the acr value. You can achieve something like that by using `getToken` and changing the `export default NextAuth({` to:
-
-```
-import { getToken } from 'next-auth/jwt';
-export default async function auth(req: NextApiRequest, res: NextApiResponse) {
-    ...
-    const accessToken = (await getToken({req}))?.accessToken as string; // (Depends on your session setup)
-    return await NextAuth(req, res, nextAuthOptions);
-}
-```
+  ```js
+  import { getToken } from 'next-auth/jwt';
+  export default async function auth(req: NextApiRequest, res: NextApiResponse) {
+      ...
+      const accessToken = (await getToken({req}))?.accessToken as string; // (Depends on your session setup)
+      return await NextAuth(req, res, nextAuthOptions);
+  }
+  ```
 
 ## The Frontend
 
 The frontend setup for your auth pages is simple (if everything else is working correctly!)
 
-Grab the session with: `const session = useSession();`
+Grab the session with:
+
+```js
+const session = useSession();
+```
 
 And your CE JWT `session.data.accessToken`, again assuming you configure the session callback with the same property name as this.
 

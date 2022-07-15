@@ -11,11 +11,13 @@ destination: '_site'
 paginate: 4
 paginate_path: /blog/page:num/
 permalink: /blog/:year/:month/:title/
+highlighter: rouge
 kramdown:
   input: GFM
   hard_wrap: false
+  syntax_highlighter: rouge
 relative_links:
-  enabled:     true
+  enabled: true
   collections: true
 
 # SEO Stuff
