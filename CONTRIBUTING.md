@@ -14,7 +14,7 @@ There are a few ways you can contribute, including:
 
 The blog is built with [GitHub Pages](https://help.github.com/articles/what-is-github-pages/). Please set up a local version of your [Jekyll GitHub Pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) site to test changes locally before creating a pull request.
 
-### Raising an issues or pull request to improve the site
+### Raising an issue or pull request to improve the site
 
 Follow the [issue template](./.github/ISSUE_TEMPLATE.md) and [pull request template](./.github/PULL_REQUEST_TEMPLATE.md) appropriately, for all purposes of the site (documentation, site construct.)
 
