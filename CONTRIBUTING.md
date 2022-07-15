@@ -4,43 +4,44 @@
 
 ## Getting started
 
-The few ways you can contribute
+There are a few ways you can contribute, including:
 
 - Raise issues and pull requests to improve the site
-- Raise pull requests to submit a blog post
-- Raise pull requests to update documentation on the site [docs](./_docs) or README's
+- Raise a pull request to add a blog post
+- Raise a pull request to update [the site's documentation](_docs) or READMEs
 
-## Writing on your local site
+## How to run and test the site locally
 
-The blog is built with [GitHub Pages](https://help.github.com/articles/what-is-github-pages/). Please set up a local version of your [Jekyll GitHub Pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) site to test changes locally before making a pull request
+The blog is built with [GitHub Pages](https://help.github.com/articles/what-is-github-pages/). Please set up a local version of your [Jekyll GitHub Pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/testing-your-github-pages-site-locally-with-jekyll) site to test changes locally before creating a pull request.
 
-### Raising issues and pull requests to improve the site
+### Raising an issues or pull request to improve the site
 
 Follow the [issue template](./.github/ISSUE_TEMPLATE.md) and [pull request template](./.github/PULL_REQUEST_TEMPLATE.md) appropriately, for all purposes of the site (documentation, site construct.)
 
-### Submitting blog posts.
+### Submitting a blog post
 
-- Create your blog posts under [_posts](_posts/).
-- GitHub style Markdown is fully supported.
-  - For LaTeX, follow [guide](https://github.blog/2022-05-19-math-support-in-markdown/).
-- Each blog article requires a banner image which is stored in folder /assets/img/banners/. You can add a new banner there or use one of the existing ones.
-- If you include images in the content of the article, please add those into the folder /assets/img/.
-- Please test your changes locally before submitting a pull request.
-- All pull requests need will need to pass through [the review process](#review-process).
-- You can toggle the `published` boolean to control the publication or unpublishing of the blog to the site.
+- Create your new post as a file under [_posts](_posts), using the following filename format:
+    - `yyyy-MM-dd-<name of the blog>.md`.
+- GitHub-style Markdown is fully supported.
+  - For LaTeX, follow [GitHub's guide](https://github.blog/2022-05-19-math-support-in-markdown/).
+- Each blog article requires a banner image, which should be placed in the folder `/assets/img/banners`. You can use an existing banner or add your own.
+- If you include images in the content of the article, add them to the folder `/assets/img`.
+- Please thoroughly test your changes locally before submitting a pull request.
+- Each pull request will pass through [our review process](#review-process).
+- Set the front matter boolean `published` (see below) to declare whether your post should be published immediately when your pull request is merged.
 
-**Structure**
+#### Markdown structure
 
-- Filename standard: `yyyy-MM-dd-<name of the blog>.md`
-- Front Matter
-  - Supports standard [jekyll Front matter](https://jekyllrb.com/docs/front-matter/)
-  - e.g.:
+- Front matter (standard [Jekyll front matter](https://jekyllrb.com/docs/front-matter)), for example:
+- The content of your post, formatted with semantically structured Markdown.
 
-```markdown
+#### Front matter example
+
+```yaml
 ---
-title: Title of your blog as you need it displayed
-published: true/false (false will not publish it on the site)
-author: Your name or comma separated names for multiple authors
+title: Title which will be displayed
+published: true
+author: First Author, Second Author
 description: brief description of the blog as subtext on the site
 categories: 
   - yaml list of categories
@@ -48,10 +49,10 @@ tags:
   - yaml list of tags 
 date: yyyy-MM-dd
 banner:
-  image: just name of image (eg: image.png). The image will need to be stored in the /assets/img/banner folder
+  image: Image name without path, for example "image.png". Image must to be stored in `/assets/img/banner`
 ---
 ```
 
 ## Review process
 
-TBD
+TBD.
