@@ -64,7 +64,16 @@ There by the probability of unavailability is 0 for the mutually exclusive event
 
 > For the Mutually exclusive events , then probability of either occuring
 
-$$P(AR1 \space or \space AR2) = P(AR1 \space ∪ \space AR2 ) = (P(AR1) \space +  \space P(AR2) - P(AR1 ∩ AR2) = P(AR1) \space + \space  P(AR2) \space - \space 0 \space =  P(AR1) \space + \space  P(AR2)$$
+<p>
+\begin{equation}
+\begin{split}
+P(AR1 \space OR \space AR2) & = P(AR1 ∪ AR2) \\
+              & = (P(AR1) + P(AR2) - P(AR1 ∩ AR2) \\
+              & = P(AR1) + P(AR2) - 0 \\
+              & = P(AR1) + P(AR2)
+\end{split}
+\end{equation}
+</p>
 
 calculating that as values
 - Probability of AR1 to be down : 0.0005
