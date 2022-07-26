@@ -137,7 +137,7 @@ region=eu-north
     - `bwe "az-example-dev"`: This will export all the environment variables in the secure note on that terminal session. 
 
 - To list and set
-    - `bwll "az-" to list all your azure vault items. e.g:
+    - `bwll "az-"` to list all your azure vault items. e.g:
       
       ```
       "az-example-dev"
