@@ -105,7 +105,7 @@ Create the following aliases and functions in your shell configuration (~/.zshrc
       bw get template item | jq --arg a "$(cat /tmp/.env)" --arg b "$1" '.type = 2 | .secureNote.type = 0 | .notes = $a | .name = $b' | bw  encode | bw create item
       rm /tmp/.env
     }
-    ```
+   ```
    
 ### Using the functions and aliases.
 
