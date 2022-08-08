@@ -22,7 +22,7 @@ Today, we are excited to announce an open-source project called [Nx Plugins](htt
 
 ## Introduction
 
-Nx Plugins is a [Nx](https://nx.dev) mono repo which consists of plugins which supports the Nx eco-system.
+Nx Plugins is a [Nx](https://nx.dev) mono repo which consists of plugins which support the Nx eco-system.
 
 Our plugins so far include:
 
@@ -35,7 +35,7 @@ Our choice of framework for e2e testing is Playwright. There is already a plugin
 The native Playwright runner gives you the following advantages:
 
 - Recommended by Playwright
-- Nicer syntax and built in assertions
+- Nicer syntax and built-in assertions
 - Easier to find docs on playwright.dev
 
 ## Why Open Source?
@@ -44,9 +44,9 @@ Adoption for Nx as a mono repo build tool has significantly increased over time.
 
 While working on an internal project where we were using Playwright for end-to-end testing, some manual configuration was required to integrate native Playwright with Nx.
 
-The team within M&S has come up with an internal project to create a plugin which simplifies integration of Nx with Playwright.
+We came up with an internal project to create a plugin which simplifies integration of Nx with Playwright.
 
-With a successful implementation of the nx-plugins project, the team at M&S decided to open-source it to allow the community to benefit from it and contribute to it.
+With a successful implementation of the nx-plugins project, we decided to open-source it to allow the community to benefit from it and contribute to it.
 
 ## Licensing
 
@@ -54,7 +54,7 @@ Our project is published under the [MIT License](https://github.com/marksandspen
 
 ## Join Us
 
-We appreciate all input and contribution from the community.  
+We appreciate all input and contributions from the community.  
 Please share any feedback or questions via [GitHub Issues](https://github.com/marksandspencer/nx-plugins/issues).  
 To contribute please check our [contribution guidelines](https://github.com/marksandspencer/nx-plugins/blob/main/CONTRIBUTING.md).  
 Your support will help to shape the project to meet community needs.
