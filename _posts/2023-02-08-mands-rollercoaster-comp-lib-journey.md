@@ -19,9 +19,9 @@ Software Engineering at M&S have been developing the UI since 2014 and we have t
 
 ## How it started
 
-We started our headless commerce journey with an Angular framework we called FEAR (Front-End Architecture, internally it is a running joke that M&S loves a good acronym) and as the industry moved towards NodeJS and Handlebars we followed suit. It drew inspiration from eBay’s front-end framework which prioritised SEO and page speed.
+We started our headless commerce journey with an Angular framework we called FEAR (Front-End Architecture, internally it is a running joke that M&S loves a good acronym).
 
-We named this new product FESK (Front-End Starter Kit). It contained everything an engineer needed to develop and deploy a web application, leveraging a pattern library and common utilities to solve customer problems faster than FEAR, using Vanilla JS.
+As the industry moved towards NodeJS and Handlebars we followed suit, drawing inspiration from eBay’s front-end framework which prioritised SEO and page speed. We named this new product FESK (Front-End Starter Kit). It contained everything an engineer needed to develop and deploy a web application, leveraging a pattern library and common utilities to solve customer problems faster than FEAR, using Vanilla JS.
 
 ## So, what went wrong?
 
@@ -31,11 +31,11 @@ On reflection we see this in three parts:
 
 We decided on Vanilla JS because of the instability of popular frameworks at the time; however, this eventually made it hard to onboard and recruit engineers as most were focused on learning the other popular and emerging frameworks (such as Angular, React, etc.) which were becoming more lucrative on the job market.
 
-FESK was complex to use and did not stick to industry standards, so as a direct result we had to maintain a lot of custom documentation.
+FESK was complex to use and did not stick to industry standards, for example creating an incremental DOM implementation as an alternative to React's VirtualDom. As a direct result we had to maintain a lot of custom code and document it extensively.
 
 The framework was built as multiple modules, leveraging NPM packages. Unintentionally, but by design, it separated the module from the users’ application and left us unaware of what was being used and the impact of change if a component was updated. This resulted in an architecture that was not well thought out and each web app became a page template, with each page template requiring its own engineering team.
 
-With many separate teams as consumers, it was hard to understand if they were consuming the latest releases, and some teams didn’t update past the first release. Resulting in us missing the benefits of code reuse, and had many different independent forks to maintain.
+With many separate teams as consumers, it was hard to understand if they were consuming the latest releases, and some teams didn’t update past the first release. Resulting in us missing the benefits of code reuse, and having many different independent forks to maintain.
 
 ### 2. Company culture and buy in (support)
 
@@ -43,9 +43,9 @@ FESK began as a POC for improving the front-end customer experience delivery, wi
 
 While developing FESK itself, it was difficult to understand the consumer problems as they couldn’t articulate how FESK might be able to help them. This resulted in production issues and a lack of confidence in the product and its rollout across the web channel. As more teams adopted the product, it became clear we had not taken the business, and more importantly, the engineers on the journey to develop, own and maintain it.
 
-This lack of buy-in showed itself through teams frequently not contributing back to FESK because of slowness in PR approvals, or simply not understanding its usefulness in their day-to-day. In addition, UX came late to the party as it was engineering led, so they were playing catch up to requests they maybe did not fully understand.
+This lack of buy-in showed itself through teams frequently not contributing back to FESK because of slowness in PR approvals, or simply not understanding its usefulness in their day-to-day operation. In addition, UX came late to the party as it was engineering-led, so they were playing catch up to requests they maybe did not fully understand.
 
-As it grew, in an attempt to encourage engineers to talk about their common platform and progress it, the centralised team was replaced with a community model. This failed as all the users did not know what to do. Subsequently, without an active community, teams ended up building siloed components and experiences, reinventing the wheel without realising.
+As it grew, in an attempt to encourage engineers to talk about their common platform and progress it, the centralised team was replaced with a community model. This failed as all the users did not know how to, or were not interested in contributing in this way. Subsequently, without an active community, teams ended up building siloed components and experiences, reinventing the wheel without realising.
 
 ### 3. Platform responsibilities
 
@@ -61,7 +61,7 @@ Our aim with Onyx is to create a ‘batteries included’ web stack product with
 
 ## Why will it be different this time?
 
-From our previous attempts we have realised that we are doing this to enable more extensive reuse across our web channels. The previous failures have proved to us the value of this and that reducing the repetition of building components & features ultimately speeds up development.
+From our previous attempts we have realised that we are doing this to enable more extensive re-use across our web channels. The previous failures have proved to us the value of this and that reducing the repetition of building components & features ultimately speeds up development.
 
 This time we have some guiding principles;
 
@@ -77,7 +77,7 @@ This has resulted in a more architecturally sound product in the form of what we
 
 Although still at the beginning of this transformation, we can see engagement from at least 10 teams, and high levels of contribution and component adoption and reuse across applications.
 
-Leveraging industry-standard tools and techniques we have managed to not just solve our reusability problems but add value to them with; user adoption metrics, visual regression testing efficiencies and an elevated level of standardisation, including and driven by accessibility.
+Leveraging industry-standard tools and techniques we have managed to not just solve our reusability problems but add value to them with user adoption metrics, visual regression testing efficiencies and an elevated level of standardisation, including and driven by accessibility.
 
 ## Where do we go next?
 
