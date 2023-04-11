@@ -1,5 +1,5 @@
 ---
-title: AXE (accessibility) tests in Onyx
+title: Accessibility testing with AXE
 published: true
 author: Emma Patricios
 date: 2023-04-04
@@ -99,4 +99,4 @@ At M&S we use [GitHub Actions](https://github.com/features/actions) to build, te
 
 ## Summary
 
-Automated AXE tests are just part of our accessibility testing at M&S. [Read more about accessibility testing in Onyx](https://www.notion.so/Accessibility-in-Onyx-6ef2f940fab94f8583c6dbe024a3d886).
+Automated AXE tests are just part of our accessibility testing at M&S. [Read more about our accessibility testing](/blog/2023/04/axe-testing-in-web-platform/).
