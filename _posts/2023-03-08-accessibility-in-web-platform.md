@@ -1,5 +1,5 @@
 ---
-title: Accessibility in Onyx
+title: Web Platform Accessibility
 published: true
 author: Emma Patricios
 date: 2023-02-08
@@ -12,13 +12,13 @@ banner:
   image: digital-design-language.png
 ---
 
-# Accessibility in Onyx
+# Web Platform Accessibility
 
-From the very start of the development of Onyx, a single question has led the implementation of automated accessibility testing: How do we ensure the M&S customer is served an accessible web page?
+From the very start of the development of the new web platform (Onyx), a single question has led the implementation of automated accessibility testing: How do we ensure the M&S customer is served an accessible web page?
 
 ## Code linting
 
-We added an accessibility linter as part of the Onxy mono-repo for any issue that can be discovered during the development phase to catch issues early. [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) checks the static JSX code as it is written and flags any mistakes or omissions. It is set up in CI to fail the build if any violations are introduced via code merges.
+We added an accessibility linter as part of the Onyx mono-repo for any issue that can be discovered during the development phase to catch issues early. [eslint-plugin-jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) checks the static JSX code as it is written and flags any mistakes or omissions. It is set up in CI to fail the build if any violations are introduced via code merges.
 
 We always add a caveat, that any type of automated testing is no substitute for real-world user and assistive device testing, but they give us a great starting point and encourage us to think about how we are coding.
 
