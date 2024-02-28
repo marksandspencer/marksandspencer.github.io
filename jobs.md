@@ -1,5 +1,5 @@
 ---
 layout: page
-title: Jobs
+title: M&S Careers
 external_url: https://jobs.marksandspencer.com
 ---
