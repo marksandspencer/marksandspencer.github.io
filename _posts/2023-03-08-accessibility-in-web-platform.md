@@ -1,7 +1,10 @@
 ---
+layout: post
 title: Web Platform Accessibility
 published: true
-author: Emma Patricios
+author: 
+  - name: Emma Patricios
+    github: Emmasax
 date: 2023-02-08
 categories:
   - ui library
@@ -11,8 +14,6 @@ tags:
 banner:
   image: digital-design-language.png
 ---
-
-# Web Platform Accessibility
 
 From the very start of the development of the new web platform (Onyx), a single question has led the implementation of automated accessibility testing: How do we ensure the M&S customer is served an accessible web page?
 

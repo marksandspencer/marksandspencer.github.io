@@ -1,8 +1,14 @@
 ---
+layout: post
 title: Announcing our open-source project, Nx Plugins
 published: true
 description: Nx Plugins is a Nx mono repo which consists of plugins which supports the Nx eco-system.
 author: Farhan Patwary, Prabhat Thapa, Andrea Caldera, Danyal Aytekin
+author: 
+  - name: Farhan Patwary
+  - name: Prabhat Thapa
+  - name: Andrea Caldera
+  - name: Danyal Aytekin
 usemathjax: true
 categories:
   - nx-plugin
@@ -15,8 +21,6 @@ date: 2022-08-05
 banner:
   image: terminal.png
 ---
-
-# Announcing our open-source project, Nx Plugins
 
 Today, we are excited to announce an open-source project called [Nx Plugins](https://github.com/marksandspencer/nx-plugins).
 

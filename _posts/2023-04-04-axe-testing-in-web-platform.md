@@ -1,7 +1,10 @@
 ---
+layout: post
 title: Accessibility testing with AXE
 published: true
-author: Emma Patricios
+author: 
+  - name: Emma Patricios
+    github: Emmasax
 date: 2023-04-04
 categories:
   - ui library
@@ -11,8 +14,6 @@ tags:
 banner:
   image: digital-design-language.png
 ---
-
-# Accessibility testing with AXE
 
 Accessibility testing is necessary to ensure that our digital products and services can be used by everyone, including people with disabilities, improving the user experience in the process. It helps us to identify and remove barriers that may prevent people from completing their journey through a website.
 
