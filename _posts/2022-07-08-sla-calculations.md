@@ -1,7 +1,9 @@
 ---
+layout: post
 title: Availability Service Level Calculation
 published: true
-author: Steven Gonsalvez
+author: 
+     - name: Steven Gonsalvez
 description: Calculating the composite availability SLA for your stack
 usemathjax: true
 categories: 
@@ -15,8 +17,6 @@ date: 2022-07-05
 banner:
   image: availability.png
 ---
-
-# Calculating the composite availability SLA for your stack 
 
 The following guide below will help you calculate your own availability.
 

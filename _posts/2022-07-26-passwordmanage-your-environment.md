@@ -1,8 +1,10 @@
 ---
+layout: post
 title: Password Manage your environment and secrets with bitwarden
 published: true
 description: Manage your secrets and local environment with bitwarden password manager
-author: Steven Gonsalvez
+author: 
+     - name: Steven Gonsalvez
 usemathjax: true
 categories: 
   - environment
@@ -15,8 +17,6 @@ date: 2022-07-26
 banner:
   image: passwordmanager.png
 ---
-
-## Use a password manager to organise your local env and dot env files.
 
 `dotenv` files for local development have been ever so popular with tonne of tools out there to manage.  Even if you utilise it for local development, if secrets and keys find their way into those dotenv files for convenience, it becomes an attack vector ready to be compromised.
 

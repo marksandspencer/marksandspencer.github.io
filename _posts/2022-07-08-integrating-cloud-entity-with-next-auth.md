@@ -1,7 +1,13 @@
 ---
+layout: post
 title: Integrating Cloudentity with NextAuth.js
 published: true
-author: Chris Mitchelmore, Andrea Caldera, Prabhat Thapa, Danyal Aytekin 
+author:
+  - name: Chris Mitchelmore
+    github: crmitchelmore
+  - name: Andrea Caldera
+  - name: Prabhat Thapa
+  - name: Danyal Aytekin
 date: 2022-07-08
 categories: 
   - identity
@@ -12,8 +18,6 @@ tags:
 banner:
   image: terminal.png
 ---
-
-# Integrating Cloudentity with NextAuth.js
 
 M&S is in the process of updating our retail platform. As part of this we will decouple identity from our existing monolith and modernise the feature set along the way.
 

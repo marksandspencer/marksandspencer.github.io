@@ -1,5 +1,4 @@
-# Marks and Spencer Engineering blog 
-The repository of the Marks and Spencer Engineering Garden.
+# Marks and Spencer Engineering Blog
 
 ## Purpose
 This repository serves as the public site for Marks and Spencer Engineering blog.

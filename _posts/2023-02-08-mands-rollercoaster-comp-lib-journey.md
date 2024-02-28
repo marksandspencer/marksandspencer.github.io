@@ -1,7 +1,11 @@
 ---
+layout: post
 title: M&S's Rollercoaster Component Library Journey
 published: true
-author: Dilesh Mistry, Emma Patricios
+author: 
+     - name: Dilesh Mistry
+     - name: Emma Patricios
+       github: Emmasax
 date: 2023-02-08
 categories:
   - ui library
@@ -12,8 +16,6 @@ tags:
 banner:
   image: digital-design-language.png
 ---
-
-# M&S's Rollercoaster Component Library Journey
 
 Software Engineering at M&S have been developing the UI since 2014 and we have tried a few times to react to customer needs quickly over the years. This article gives an overview of our journey and the lessons we’ve learnt – from custom-built vanilla JS to an industry-standard, reusable framework.
 
