@@ -38,7 +38,7 @@ Our working trunk moved quickly, meaning that fixes made on our release branch w
 This extra cognitive load on the release champion leads to slower releases. Not only are releases slower and harder to action, with GitFlow we miss out on fixes on the working trunk until the release is finalized. We can mitigate this through _multiple_ pull requests, but that’s even more cognitive load.
 
 ### The one trunk to rule them all
-Managing two trunks was starting to get impractical—why not get rid of one of them?
+Managing two trunks was starting to get impractical — why not get rid of one of them?
 
 Trunk-based development is an approach where there’s one trunk branch (like `main`), and all work lands there. All work is releasable, made possible by feature flags and automated testing, meaning any given commit is safe to release! While this sounds great in theory, and works well in systems where rolling backwards or forwards is quick and easy, it’s problematic for mobile apps.
 
@@ -46,7 +46,7 @@ Apps are constrained by the stores, not shipping our releases to customers befor
 
 A branching structure growing in popularity for mobile apps nowadays is a combination of trunk-based development and release branches. Let’s explain:
 
-Developers do their work in small, manageable chunks, and merge into a trunk branch: `main`. Every week (or fortnight in our case), a workflow kicks off to cut a _release branch_. This release branch behaves similarly to the GitFlow release branch—it’s fixing our base at a given point, allowing us to stabilize before releasing. Fixes for the release could go one of two ways - based on release and merged into the release branch, or based on `main`, and back-ported to the release branch.
+Developers do their work in small, manageable chunks, and merge into a trunk branch: `main`. Every week (or fortnight in our case), a workflow kicks off to cut a _release branch_. This release branch behaves similarly to the GitFlow release branch — it’s fixing our base at a given point, allowing us to stabilize before releasing. Fixes for the release could go one of two ways - based on release and merged into the release branch, or based on `main`, and back-ported to the release branch.
 
 Merging a release branch back in to where it came from was one of the time sinks we were looking to get rid of, removing the need to resolve merge conflicts. Instead, we aimed for fixing on `main`, and _never_ merging the release branch back in.
 
@@ -59,7 +59,56 @@ This works the majority of the time, but what about merge conflicts? In our old 
 
 Developers fix their bugs on `main`, meaning the code they need to modify to address the issue has moved on from the base the release branch was cut from. If a fix can’t be cleanly cherry-picked onto the release branch, the author of the fix is prompted to create a pull request _per-fix_, addressing more granular conflicts as they come up!
 
-### Building a release process for portability
+### Building a release process
+We use GitHub Actions at M&S, knowing from the get-go that we’d be building our release process to integrate with it. We wanted a developer experience that meant engineers managing the release didn't need to leave the repository — building our release process using GitHub Actions Workflows was the obvious choice!
+
+There’s a surprisingly large number of ways to write GitHub Actions Workflows — here’s how we did it.
+
+#### The tools
+A release process is mixture of CI & CD (i.e building and deploying something), and git-ops (i.e branching, tagging, releasing). GitHub Actions is positioned as a CI/CD system out of the box, but you can do _much_ more with it through the use of the [GitHub CLI](https://cli.github.com/).
+
+`gh` comes pre-installed on GitHub Actions runners, and offers a _lot_ of convenient functionality for automating git operations, such as:
+* `gh pr` - list, create, and edit pull requests
+* `gh release` - create, view and edit releases
+* `gh variable` - interact with repository variables
+
+`gh` commands are backed by JSON, which can be queried using [`jq`](https://jqlang.github.io/jq/) through the `--jq` option. This is super powerful, allowing you to write complex data operations in a few lines of bash. Here’s how you might use JQ to fetch all the URLs for open pull requests with the “Release” label:
+```bash
+existing_release_pr_urls=$(
+    gh pr list \
+      --state open \
+      --label Release \
+      --json url \
+      --jq '.[].url'
+)
+```
+
+It’s trivial to use `gh` for write operations, as long as you use a token with the right permissions. We use [Repository Variables](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/store-information-in-variables) to store the latest version code of a release while it’s stabilizing. Getting and setting this variable is a one-liner:
+```bash
+gh variable set "${VERSION_VAR}" --body "${VERSION_CODE}"
+``` 
+
+To use `gh` you need to provide it with a [token through an environment variable](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/using-github-cli-in-workflows). The automatically-authenticated [`GITHUB_TOKEN` secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/automatic-token-authentication#using-the-github_token-in-a-workflow) gets you most of the way there, but in some cases we found that GitHub Actions’ permission model doesn’t line up with the permission model of the GitHub API. It’s easy enough to create your own PAT and store it in your Actions Secrets, which we did to make use of `gh` when querying org-level information.
+
+#### Working on complex Workflows
+We set out on implementing everything we need for a release process using what GitHub Actions gives you out-of-the-box — workflow composition through `workflow_call` triggers, job dependencies to create release “pipelines”, and `bash` steps to work the `gh` magic.
+
+Designing the solution was the easy part — implementing it with confidence that it wouldn’t break immediately was much harder.
+
+GitHub Actions workflows are similar to other declarative workflow formats you’ll see supported by other providers — they’re Yaml files with a custom schema. While this makes for easy reading, it means there’s no easy way to unit test them. We have a system in-place to test reusable workflows, built on top of [Act](https://github.com/nektos/act), but we knew that testing workflows this complex would be incredibly time-consuming — we needed to be more nimble.
+
+Instead, we created a sandbox repository. This repository was carefully crafted to mirror the exact branching structure and branch protection models of the main Android repository, giving us a prod-like environment to test our workflows against. To make sure we could iterate quickly, we stubbed workflows which were expected to build and test the project, allowing us to focus on our release workflows in isolation.
+
+By using a sandbox for testing, we could try many different approaches, breaking things as needed, and make as many releases as we could to test the process end-to-end and build our confidence. In the end, we’d created more than 100 releases, covering all the scenarios we’d accounted for. With the workflows looking and feeling as good as we could make them, it was time to roll out.
+
+#### Rolling out
+Rolling out major branching changes alongside a revamp of a release process is not an easy task. We would have to block access to writing to our trunk branch(es) for a time during the cut-over, which would stop developers from merging their code. We needed to ensure this downtime was during quiet hours, so we set a target of a Friday morning at 7am BST and got planning.
+
+Our plan took the shape of a run book - a series of checkboxes which we’d run through top-to-bottom, which would take us from our two-trunk world, to trunk-based with release branches. These checkboxes were nuanced, and some more complex than others. We did as much work ahead-of-time as possible — creating pull requests, scripts of run to modify things in batches, and preparation of branch protection rules in parallel. When this run book eventually looked comprehensive, we trial-ran it in our sandbox, exposing a few blind-spots.
+
+When it came time to execute, we joined a call and paired on the run book - one person actioning the bullet points, the other taking notes. It took about half and hour to work through, done and ready to use an hour before engineers would start coming online!
+
+### Aiming for portability
 Across M&S we have more than 100 mobile applications in their own individual repositories. A lot of these have their own, manual release process, and a consistent branching structure doesn’t exist. We knew this coming in to the reimagining of our releasing process, and built it from the ground up with _portability_ in mind.
 
 Our release process can be summarized as just two manual steps:
@@ -73,7 +122,7 @@ The common points across _all_ mobile release then end up being:
 2. Commits to the `release/X` branch builds the apps, and stages them somewhere.
 3. Releases are “finalized”, promoting the latest build and sending any relevant communications.
 
-We aimed to build these actions in a platform- & store-agnostic way—what applies to Android should apply to iOS, and what applies to Google Play should apply to internal Endpoint management systems!
+We aimed to build these actions in a platform- & store-agnostic way — what applies to Android should apply to iOS, and what applies to Google Play should apply to internal Endpoint management systems!
 
 We’ve recently reused the same code in iOS, leveraging reusable workflows to share portions of our process, and are generalizing more and more of the process to apply to all our other applications.
 
