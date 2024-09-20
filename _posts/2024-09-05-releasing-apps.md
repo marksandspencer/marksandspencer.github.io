@@ -15,9 +15,9 @@ banner:
   image: digital-design-language.png
 ---
 
-At Marks & Spencer we ship many apps all the time. Our customer facing apps are growing by the day, and our old, time-consuming fortnightly release process was starting to show its age.
+At Marks & Spencer we ship many apps (more than 100!) all the time. Our customer facing apps are growing by the day, and our old, time-consuming fortnightly release process was starting to show its age.
 
-It was time to go weekly, but getting there isn’t as easy as changing a two to a one. We’d have to take a broader look at branching, design something simple, and roll it all out to the Android and iOS codebases without disrupting the many teams in many time zones working on them. Releasing had to be less about dealing with source control, and more about ensuring quality.
+It was time to go weekly, but getting there isn’t as easy as replacing a two with a one. We would have to take a broader look at branching, design something simple, and roll it all out to the Android and iOS codebases without disrupting the many teams in many time zones working on them. Releasing had to be less about dealing with source control, and more about ensuring quality.
 
 This is the story of our journey towards higher quality, more frequent releases, starting with: Releasing!
 
@@ -26,7 +26,7 @@ This is the story of our journey towards higher quality, more frequent releases,
 ### Slow old GitFlow
 Both our iOS and Android repos used the classic GitFlow branching structure for the longest time. If you’re not familiar with it, here’s a quick recap:
 
-Day-to-day code lands on `develop` over the span of a couple of weeks, after which a  `release` branches is cut. The release candidate is tested and stabilized on the `release` branch before merging to `main` to trigger the deployment. `main` would then need re-merging with `develop`, to ensure those fixes made on `release` made it in to the next one.
+Day-to-day code lands on `develop` over the span of a couple of weeks, after which a  `release` branch is cut. The release candidate is tested and stabilized on the `release` branch before merging to `main` to trigger the deployment. `main` would then need re-merging with `develop`, to ensure those fixes made on `release` made it in to the next one.
 
 ![image](/assets/img/2024-09-05-gitflow-branching.png)
 *Dual-trunk branching with GitFlow*
@@ -44,7 +44,7 @@ Trunk-based development is an approach where there’s one trunk branch (like `m
 
 Apps are constrained by the stores, not shipping our releases to customers before taking their time reviewing. It takes a good amount longer for adoption to then ramp up, meaning it takes a long time to create a fix and address it. Even if we had incredible test coverage, it’s near-impossible to test every given scenario your app will be run under in production.
 
-A branching structure growing in popularity for mobile apps nowadays is a combination of trunk-based development and release branches. Let’s explain:
+A [branching structure growing in popularity for mobile apps](https://www.runway.team/blog/choosing-the-right-branching-strategy-for-mobile-development#trunk-based-w-release-branches-) nowadays is a combination of trunk-based development and release branches. Let’s explain:
 
 Developers do their work in small, manageable chunks, and merge into a trunk branch: `main`. Every week (or fortnight in our case), a workflow kicks off to cut a _release branch_. This release branch behaves similarly to the GitFlow release branch — it’s fixing our base at a given point, allowing us to stabilize before releasing. Fixes for the release could go one of two ways - based on release and merged into the release branch, or based on `main`, and back-ported to the release branch.
 
@@ -60,9 +60,9 @@ This works the majority of the time, but what about merge conflicts? In our old 
 Developers fix their bugs on `main`, meaning the code they need to modify to address the issue has moved on from the base the release branch was cut from. If a fix can’t be cleanly cherry-picked onto the release branch, the author of the fix is prompted to create a pull request _per-fix_, addressing more granular conflicts as they come up!
 
 ### Building a release process
-We use GitHub Actions at M&S, knowing from the get-go that we’d be building our release process to integrate with it. We wanted a developer experience that meant engineers managing the release didn't need to leave the repository — building our release process using GitHub Actions Workflows was the obvious choice!
+We use GitHub Actions at M&S, knowing from the get-go that we would be building our release process to integrate with it. We wanted a developer experience that meant engineers managing the release didn't need to leave the repository — building our release process using GitHub Actions Workflows was the obvious choice!
 
-There’s a surprisingly large number of ways to write GitHub Actions Workflows — here’s how we did it.
+There exists a surprisingly large number of ways to write GitHub Actions Workflows — here’s how we did it.
 
 #### The tools
 A release process is mixture of CI & CD (i.e building and deploying something), and git-ops (i.e branching, tagging, releasing). GitHub Actions is positioned as a CI/CD system out of the box, but you can do _much_ more with it through the use of the [GitHub CLI](https://cli.github.com/).
@@ -99,21 +99,21 @@ GitHub Actions workflows are similar to other declarative workflow formats you�
 
 Instead, we created a sandbox repository. This repository was carefully crafted to mirror the exact branching structure and branch protection models of the main Android repository, giving us a prod-like environment to test our workflows against. To make sure we could iterate quickly, we stubbed workflows which were expected to build and test the project, allowing us to focus on our release workflows in isolation.
 
-By using a sandbox for testing, we could try many different approaches, breaking things as needed, and make as many releases as we could to test the process end-to-end and build our confidence. In the end, we’d created more than 100 releases, covering all the scenarios we’d accounted for. With the workflows looking and feeling as good as we could make them, it was time to roll out.
+By using a sandbox for testing, we could try many different approaches, breaking things as needed, and make as many releases as we could to test the process end-to-end and build our confidence. In the end, we had created more than 100 releases, covering all the scenarios we had accounted for. With the workflows looking and feeling as good as we could make them, it was time to roll out.
 
 #### Rolling out
 Rolling out major branching changes alongside a revamp of a release process is not an easy task. We would have to block access to writing to our trunk branch(es) for a time during the cut-over, which would stop developers from merging their code. We needed to ensure this downtime was during quiet hours, so we set a target of a Friday morning at 7am BST and got planning.
 
-Our plan took the shape of a run book - a series of checkboxes which we’d run through top-to-bottom, which would take us from our two-trunk world, to trunk-based with release branches. These checkboxes were nuanced, and some more complex than others. We did as much work ahead-of-time as possible — creating pull requests, scripts of run to modify things in batches, and preparation of branch protection rules in parallel. When this run book eventually looked comprehensive, we trial-ran it in our sandbox, exposing a few blind-spots.
+Our plan took the shape of a run book - a series of checkboxes which would take us from our two-trunk world, to trunk-based with release branches. These checkboxes were nuanced, and some more complex than others. We did as much work ahead-of-time as possible — creating pull requests, scripts of run to modify things in batches, and preparation of branch protection rules in parallel. When this run book eventually looked comprehensive, we trial-ran it in our sandbox, exposing a few blind-spots.
 
-When it came time to execute, we joined a call and paired on the run book - one person actioning the bullet points, the other taking notes. It took about half and hour to work through, done and ready to use an hour before engineers would start coming online!
+When it came time to execute, we joined a call and paired on the run book - one person actioning the bullet points, the other taking notes. It took about half an hour to work through, done and ready to use an hour before engineers would start coming online!
 
 ### Aiming for portability
 Across M&S we have more than 100 mobile applications in their own individual repositories. A lot of these have their own, manual release process, and a consistent branching structure doesn’t exist. We knew this coming in to the reimagining of our releasing process, and built it from the ground up with _portability_ in mind.
 
 Our release process can be summarized as just two manual steps:
 1. Create the release branch, and wait for stability.
-2. Deploy the release to production.
+2. Deploy the release to production, and perform any associated admin.
 
 Along the way we have automated processes that kick in and do the rest of the work: Commits to release branches submit builds to the stores, and a special cherry-pick label manages fixes destined for the release.
 
@@ -122,13 +122,14 @@ The common points across _all_ mobile release then end up being:
 2. Commits to the `release/X` branch builds the apps, and stages them somewhere.
 3. Releases are “finalized”, promoting the latest build and sending any relevant communications.
 
-We aimed to build these actions in a platform- & store-agnostic way — what applies to Android should apply to iOS, and what applies to Google Play should apply to internal Endpoint management systems!
+We aimed to build these actions in a platform and store-agnostic way. What applies to Android should apply to iOS, and what applies to Google Play should apply to internal app distribution tools!
 
 We’ve recently reused the same code in iOS, leveraging reusable workflows to share portions of our process, and are generalizing more and more of the process to apply to all our other applications.
 
 ### Conclusion
 Our first step towards weekly releases was to get the process right. Dual-trunks were a bottleneck at our scale, and things needed to change. Moving to a single trunk with familiar release branching simplified the day-to-day of our developers, and made championing a release a breeze.
 
-By focussing on minimizing the strain on developers writing, merging and shipping code, we open the door to more focus on quality. Our release processes now take single-digit minutes of manual intervention, freeing up developers time for more important things, like testing and polish.
+By focussing on minimizing the strain on developers writing, merging and shipping code, we open the door to more focus on quality. We shifted merge conflict responsibility further left, simplifying the role of the engineering managing the release.
+Our release processes now take single-digit minutes of manual intervention, freeing up time for more important things, like testing and polish.
 
 Nailing the process isn’t everything, and there’s more to do to keep our quality high before we get to weekly releases, but it’s a big step in the right direction.
