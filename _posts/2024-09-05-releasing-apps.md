@@ -11,8 +11,6 @@ categories:
 tags:
   - mobile
   - platform
-banner:
-  image: digital-design-language.png
 ---
 
 At Marks & Spencer we ship many apps (more than 100!) all the time. Our customer facing apps are growing by the day, and our old, time-consuming fortnightly release process was starting to show its age.
