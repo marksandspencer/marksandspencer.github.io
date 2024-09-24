@@ -21,19 +21,19 @@ This is the story of our journey towards higher quality, more frequent releases,
 
 --- 
 
-### Slow old GitFlow
-Both our iOS and Android repos used the classic GitFlow branching structure for the longest time. If you’re not familiar with it, here’s a quick recap:
+### Slow old Git-flow
+Both our iOS and Android repos used the classic [Git-flow branching structure](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) for the longest time. If you’re not familiar with it, here’s a quick recap:
 
-Day-to-day code lands on `develop` over the span of a couple of weeks, after which a  `release` branch is cut. The release candidate is tested and stabilized on the `release` branch before merging to `main` to trigger the deployment. `main` would then need re-merging with `develop`, to ensure those fixes made on `release` made it in to the next one.
+Day-to-day code lands on `develop` over the span of a couple of weeks, after which a `release` branch is cut. The release candidate is tested and stabilized on the `release` branch before merging to `main` to trigger the deployment. `main` would then need re-merging with `develop`, to ensure those fixes made on `release` made it in to the next one.
 
 ![image](/assets/img/2024-09-05-gitflow-branching.png)
-*Dual-trunk branching with GitFlow*
+*Dual-trunk branching with Git-flow*
 
 All in all, pretty reasonable! However, it started to become a problem for us as more and more developers started contributing. Branching from a working trunk and stabilizing was fine, as was merging to `main` - a target that isn’t moving. The problem was going the other way - re-integrating `main` with `develop`.
 
-Our working trunk moved quickly, meaning that fixes made on our release branch would likely end up conflicting. Resolving this conflict ended up being a responsibility of the release champion, who sometimes wouldn’t have the context needed to action it correctly without effort. We automated as much as we could, merging this pull request automatically if there wasn’t conflicts. This meant fewer clicks of the “Accept” button, but meant it was easier to miss that a conflict existed and not action the merge at all!
+Our working trunk moved quickly, meaning that fixes made on our release branch would likely end up conflicting. Resolving this conflict ended up being a responsibility of the release champion, who sometimes wouldn’t have the context needed to action it correctly without effort. We automated as much as we could, merging this pull request automatically if there wasn’t conflicts. This meant fewer clicks of the “Accept” button, while also meaning it was easier to miss that a conflict existed and not action the merge at all!
 
-This extra cognitive load on the release champion leads to slower releases. Not only are releases slower and harder to action, with GitFlow we miss out on fixes on the working trunk until the release is finalized. We can mitigate this through _multiple_ pull requests, but that’s even more cognitive load.
+This extra cognitive load on the release champion leads to slower releases. Not only are releases harder to action, with Git-flow we miss out on fixes on the working trunk until the release is finalized. We can mitigate this through _multiple_ pull requests, but that’s even _more_ cognitive load.
 
 ### The one trunk to rule them all
 Managing two trunks was starting to get impractical — why not get rid of one of them?
@@ -44,7 +44,7 @@ Apps are constrained by the stores, not shipping our releases to customers befor
 
 A [branching structure growing in popularity for mobile apps](https://www.runway.team/blog/choosing-the-right-branching-strategy-for-mobile-development#trunk-based-w-release-branches-) nowadays is a combination of trunk-based development and release branches. Let’s explain:
 
-Developers do their work in small, manageable chunks, and merge into a trunk branch: `main`. Every week (or fortnight in our case), a workflow kicks off to cut a _release branch_. This release branch behaves similarly to the GitFlow release branch — it’s fixing our base at a given point, allowing us to stabilize before releasing. Fixes for the release could go one of two ways - based on release and merged into the release branch, or based on `main`, and back-ported to the release branch.
+Developers do their work in small, manageable chunks, and merge into a trunk branch: `main`. Every week (or fortnight in our case), a workflow kicks off to cut a _release branch_. This release branch behaves similarly to the Git-flow release branch — it’s fixing our base at a given point, allowing us to stabilize before releasing. Fixes for the release could go one of two ways - based on release and merged into the release branch, or based on `main`, and back-ported to the release branch.
 
 Merging a release branch back in to where it came from was one of the time sinks we were looking to get rid of, removing the need to resolve merge conflicts. Instead, we aimed for fixing on `main`, and _never_ merging the release branch back in.
 
@@ -53,9 +53,12 @@ Merging a release branch back in to where it came from was one of the time sinks
 
 To make this “back-porting” simple for developers, we introduced an automatic cherry-picking workflow. When bugs come up in a release before deployment, pull requests with fixes would land in `main`, first. These pull requests have a special label which another piece of automation picks up on, knowing to cherry-pick the newly merged work on to the open release branch!
 
-This works the majority of the time, but what about merge conflicts? In our old school GitFlow model, resolving conflicts ended up being the responsibility of the release champion, who may or may not have all the context needed. With our cherry-picking flow, the conflicts end up having to be resolved more with more granularity the _other way around_.
+This works the majority of the time, but what about merge conflicts? In our old school Git-flow model, resolving conflicts ended up being the responsibility of the release champion, who may or may not have all the context needed. With our cherry-picking flow, the conflicts end up having to be resolved more with more granularity the _other way around_.
 
 Developers fix their bugs on `main`, meaning the code they need to modify to address the issue has moved on from the base the release branch was cut from. If a fix can’t be cleanly cherry-picked onto the release branch, the author of the fix is prompted to create a pull request _per-fix_, addressing more granular conflicts as they come up!
+
+![image](/assets/img/2024-09-05-conflicts-compared.png)
+*Comparing effort to resolve conflicts by branching structure*
 
 ### Building a release process
 We use GitHub Actions at M&S, knowing from the get-go that we would be building our release process to integrate with it. We wanted a developer experience that meant engineers managing the release didn't need to leave the repository — building our release process using GitHub Actions Workflows was the obvious choice!
