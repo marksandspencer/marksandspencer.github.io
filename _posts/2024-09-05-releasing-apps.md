@@ -109,27 +109,30 @@ Our plan took the shape of a run book - a series of checkboxes which would take 
 When it came time to execute, we joined a call and paired on the run book - one person actioning the bullet points, the other taking notes. It took about half an hour to work through, done and ready to use an hour before engineers would start coming online!
 
 ### Aiming for portability
-Across M&S we have more than 100 mobile applications in their own individual repositories. A lot of these have their own, manual release process, and a consistent branching structure doesn’t exist. We knew this coming in to the reimagining of our releasing process, and built it from the ground up with _portability_ in mind.
+Across M&S we have more than 100 mobile applications in their own individual repositories. Each of these has a distinct release process, automated to varying degrees, with different branching structures throughout. This produces significant cognitive load when working across multiple projects, leading to slower iteration cycles, and ultimately leaving value on the table for our Colleagues and Customers.
+
+In solving the release process for the highest traffic repositories, we saw an opportunity to take our newly found insight and apply it to all of our other applications. Built from the ground with _conventions_ and _portability_ in mind, our new process can solve branching and releasing across many code bases and teams, with the flexibility to scale up and service large, highly collaborative repositories. Here's how we did it:
 
 Our release process can be summarized as just two manual steps:
-1. Create the release branch, and wait for stability.
+1. Create the release branch (`release/X`), and wait for stability.
 2. Deploy the release to production, and perform any associated admin.
 
-Along the way we have automated processes that kick in and do the rest of the work: Commits to release branches submit builds to the stores, and a special cherry-pick label manages fixes destined for the release.
+Along the way, we have automated processes that kick in and do the rest of the work: Commits to release branches submit builds to the stores, and a special cherry-pick label manages fixes destined for the release.
 
 The common points across _all_ mobile release then end up being:
-1. Releases are cut from the `main` branch.
-2. Commits to the `release/X` branch builds the apps, and stages them somewhere.
+1. A release branches (`release/X`) is cut from the `main` branch.
+2. Commits to `release/X` builds the apps, and stages them somewhere.
 3. Releases are “finalized”, promoting the latest build and sending any relevant communications.
 
-We aimed to build these actions in a platform and store-agnostic way. What applies to Android should apply to iOS, and what applies to Google Play should apply to internal app distribution tools!
+"Finalizing" a release tends to involve a lot of repository-specific steps that need to be completed to call a release "done". The common parts here are our git operations - creating and tagging a release, closing off the release branch & pull request, and deleting any state we might have had hanging around, like labels.
+For everything else, we follow a Producer and Consumer model. By making heavy use of reusable workflows, we can share the common parts, like building release variants of apps and storing them in artifacts. Repositories can then implement their own Consumers of these produced artifacts, like deploying a pre-built application to Huawei App Gallery, or doing custom reporting on test results.
 
-We’ve recently reused the same code in iOS, leveraging reusable workflows to share portions of our process, and are generalizing more and more of the process to apply to all our other applications.
+Our approach to portability is already starting to pay off. We’ve recently reused the same code in iOS, leveraging reusable workflows to share portions of our process, and are generalizing more and more of the process to apply to all our other applications!
 
 ### Conclusion
 Our first step towards weekly releases was to get the process right. Dual-trunks were a bottleneck at our scale, and things needed to change. Moving to a single trunk with familiar release branching simplified the day-to-day of our developers, and made championing a release a breeze.
 
 By focussing on minimizing the strain on developers writing, merging and shipping code, we open the door to more focus on quality. We shifted merge conflict responsibility further left, simplifying the role of the engineering managing the release.
-Our release processes now take single-digit minutes of manual intervention, freeing up time for more important things, like testing and polish.
+Our release processes are now significantly easier to work with, taking just single-digit minutes of manual intervention per-release. This all contributes to freeing up developer time for more important things, like testing and polish.
 
 Nailing the process isn’t everything, and there’s more to do to keep our quality high before we get to weekly releases, but it’s a big step in the right direction.
