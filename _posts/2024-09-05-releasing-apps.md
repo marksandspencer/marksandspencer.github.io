@@ -15,7 +15,7 @@ tags:
 
 At Marks & Spencer we ship many apps (more than 100!) all the time. Our customer facing apps are growing by the day, and our old, time-consuming fortnightly release process was starting to show its age.
 
-It was time to go weekly, but getting there isn’t as easy as replacing a two with a one. We would have to take a broader look at branching, design something simple, and roll it all out to the Android and iOS codebases without disrupting the many teams in many time zones working on them. Releasing had to be less about dealing with source control, and more about ensuring quality.
+It was time to go weekly, but getting there wasn't going to be as easy as replacing a two with a one. We would have to take a broader look at branching, design something simple, and roll it all out to the Android and iOS codebases without disrupting the many teams in many time zones working on them. Releasing had to be less about dealing with source control, and more about ensuring quality.
 
 This is the story of our journey towards higher quality, more frequent releases, starting with: Releasing!
 
@@ -24,16 +24,16 @@ This is the story of our journey towards higher quality, more frequent releases,
 ### Slow old Git-flow
 Both our iOS and Android repos used the classic [Git-flow branching structure](https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow) for the longest time. If you’re not familiar with it, here’s a quick recap:
 
-Day-to-day code lands on `develop` over the span of a couple of weeks, after which a `release` branch is cut. The release candidate is tested and stabilized on the `release` branch before merging to `main` to trigger the deployment. `main` would then need re-merging with `develop`, to ensure those fixes made on `release` made it in to the next one.
+Day-to-day code lands on `develop` over the span of a couple of weeks, after which a `release` branch is cut. The release candidate is tested and stabilized on the `release` branch before merging a pull request to `main` to trigger the deployment to our customers. `main` would then need re-merging with `develop`, to ensure those fixes made on `release` made it in to the next one.
 
 ![image](/assets/img/2024-09-05-gitflow-branching.png)
 *Dual-trunk branching with Git-flow*
 
-All in all, pretty reasonable! However, it started to become a problem for us as more and more developers started contributing. Branching from a working trunk and stabilizing was fine, as was merging to `main` - a target that isn’t moving. The problem was going the other way - re-integrating `main` with `develop`.
+All-in-all, pretty reasonable! However, it started to become a problem for us as more and more developers started contributing. Branching from a working trunk and stabilizing was fine, as was merging to `main` - a target that isn’t moving. The problem was going the other way - re-integrating `main` with `develop`.
 
-Our working trunk moved quickly, meaning that fixes made on our release branch would likely end up conflicting. Resolving this conflict ended up being a responsibility of the release champion, who sometimes wouldn’t have the context needed to action it correctly without effort. We automated as much as we could, merging this pull request automatically if there wasn’t conflicts. This meant fewer clicks of the “Accept” button, while also meaning it was easier to miss that a conflict existed and not action the merge at all!
+Our working trunk moved quickly, meaning that fixes made on our release branch would likely end up conflicting. Resolving this conflict ended up being a responsibility of the release champion, who sometimes wouldn’t have the context needed to action it correctly without effort. We automated as much as we could, merging this pull request automatically if there wasn’t conflicts. This meant fewer clicks of the “Accept” button, which also meant it was easier to miss that a conflict existed and not action the merge at all!
 
-This extra cognitive load on the release champion leads to slower releases. Not only are releases harder to action, with Git-flow we miss out on fixes on the working trunk until the release is finalized. We can mitigate this through _multiple_ pull requests, but that’s even _more_ cognitive load.
+This extra cognitive load on the release champion lead to slower releases. Not only were releases harder to action, with Git-flow we miss out on fixes on the working trunk until the release is finalized. We did often mitigate this through _multiple_ pull requests, but that’s even _more_ cognitive load.
 
 ### The one trunk to rule them all
 Managing two trunks was starting to get impractical — why not get rid of one of them?
