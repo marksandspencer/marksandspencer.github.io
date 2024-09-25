@@ -44,7 +44,7 @@ Apps are constrained by the stores, not shipping our releases to customers befor
 
 A [branching structure growing in popularity for mobile apps](https://www.runway.team/blog/choosing-the-right-branching-strategy-for-mobile-development#trunk-based-w-release-branches-) nowadays is a combination of trunk-based development and release branches. Let’s explain:
 
-Developers do their work in small, manageable chunks, and merge into a trunk branch: `main`. Every week (or fortnight in our case), a workflow kicks off to cut a _release branch_. This release branch behaves similarly to the Git-flow release branch — it’s fixing our base at a given point, allowing us to stabilize before releasing. Fixes for the release could go one of two ways - based on release and merged into the release branch, or based on `main`, and back-ported to the release branch.
+Developers do their work in small, manageable chunks, and merge into a trunk branch through a workflow called [GitHub Flow](https://docs.github.com/en/get-started/using-github/github-flow) - branch, code, pull request, merge. Every week (or fortnight in our case), a workflow kicks off to cut a _release branch_ from `main`. This release branch behaves similarly to the Git-flow release branch — it’s fixing our base at a given point, allowing us to stabilize before releasing. Fixes for the release could go one of two ways - based on release and merged into the release branch, or based on `main`, and back-ported to the release branch.
 
 Merging a release branch back in to where it came from was one of the time sinks we were looking to get rid of, removing the need to resolve merge conflicts. Instead, we aimed for fixing on `main`, and _never_ merging the release branch back in.
 
