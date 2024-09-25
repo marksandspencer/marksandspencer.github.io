@@ -13,7 +13,7 @@ tags:
   - platform
 ---
 
-At Marks & Spencer we ship many apps (more than 100!) all the time. Our customer facing apps are growing by the day, and our old, time-consuming fortnightly release process was starting to show its age.
+At Marks & Spencer we ship many apps (more than 100!) all the time. Two of those apps, the M&S flagship app on the [App Store](https://apps.apple.com/gb/app/m-s-fashion-food-homeware/id538410698) and [Play Store](https://play.google.com/store/apps/details?id=com.marksandspencer.app), have been growing by the day, and our old, time-consuming fortnightly release process was starting to show its age.
 
 It was time to go weekly, but getting there wasn't going to be as easy as replacing a two with a one. We would have to take a broader look at branching, design something simple, and roll it all out to the Android and iOS codebases without disrupting the many teams in many time zones working on them. Releasing had to be less about dealing with source control, and more about ensuring quality.
 
